@@ -8,10 +8,18 @@ namespace Week13_Asset_Tracking
     {
         public string Brand { get; set; }
         public string Model { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
-        public string Info()
+        //public Office AssignedOffice { get; set; }
+        public static void ShowDevices(List<Device> devices)
         {
-            return $"Device -- ({Brand} {Model})";
+            Console.WriteLine($"Type\t\tBrand\t\tModel\t\t");
+            Console.WriteLine("----\t\t-----\t\t-----");
+
+            foreach (Device device in devices)
+            {
+                Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t");
+            }
         }
     }
 }

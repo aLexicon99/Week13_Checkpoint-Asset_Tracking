@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
 namespace Week13_Asset_Tracking
@@ -13,9 +12,5 @@ namespace Week13_Asset_Tracking
             Model = model;
         }
 
-        new public string Info()
-        {
-            return $"Computer : ({Brand} {Model})";
-        }
     }
 }
