@@ -16,9 +16,9 @@ model name etc.
 ### Level 2
 
 Create a program to create a list of assets (inputs) where the final result is to write the following to the console:
-• Sorted list with Class as primary (computers first, then phones)
-• Then sorted by purchase date
-• Mark any item *RED* if purchase date is less than 3 months away from 3 years
+- Sorted list with Class as primary (computers first, then phones)
+- Then sorted by purchase date
+- Mark any item *RED* if purchase date is less than 3 months away from 3 years
 
 ### Level 3
 
@@ -29,8 +29,8 @@ for that country. You should be able to input values in dollars and convert them
 todays currency charts)
 
 When you write the list to the console:
-• Sorted first by office
-• Then Purchase date
-• Items *RED* if date less than 3 months away from 3 years
-• Items *Yellow* if date less than 6 months away from 3 years
-• Each item should have currency according to country
+- Sorted first by office
+- Then Purchase date
+- Items *RED* if date less than 3 months away from 3 years
+- Items *Yellow* if date less than 6 months away from 3 years
+- Each item should have currency according to country
