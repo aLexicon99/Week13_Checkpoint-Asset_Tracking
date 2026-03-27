@@ -15,11 +15,11 @@ namespace Week13_Asset_Tracking
 
         public static void ShowDevices(List<Assets> assets)
         {
-            Console.WriteLine($"Type\t\tBrand\t\tModel\t\tPurchase Date\t\tPrice in USD\tCurrancy\tLocal price today");
-            Console.WriteLine("----\t\t-----\t\t-----\t\t-------------\t\t------------\t--------\t-----------------");
+            Console.WriteLine($"Type\t\tBrand\t\tModel\t\tOffice\t\tPurchase Date\t\tPrice in USD\tCurrancy\tLocal price today");
+            Console.WriteLine("----\t\t-----\t\t-----\t\t-----\t\t-------------\t\t------------\t--------\t-----------------");
 
-            var sortedAssets = assets.OrderBy(a => a is Computer ? 0 : 1)
-                .ThenBy(a => a.PurchaseDate).ToList();
+            var sortedAssets = assets.OrderBy(device => device is Computer ? 0 : 1)
+                .ThenBy(d => d.PurchaseDate).ToList();
 
             foreach (Assets device in sortedAssets)
             {
@@ -52,10 +52,13 @@ namespace Week13_Asset_Tracking
 
         public static void PresentDeviceInfo(Assets device, string date, ConsoleColor color = ConsoleColor.White)
         {
+            var d = device;
             Console.ForegroundColor = color;
-            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{date,-15}\t\t{device.Price,-15}\t{device.Office.Currency,-15}\t{ "Loading...",-15}");
-            if(color != ConsoleColor.White) Console.ResetColor();
             
+            decimal currentDevicePrice = Office.GetPrice(d.Office.Currency, d.Price);
+            Console.WriteLine($"{d.GetType().Name}\t{d.Brand,-15}\t{d.Model,-15}\t{d.Office.Country, -15}\t{date,-15}\t\t{d.Price,-15}\t{d.Office.Currency,-15}\t{ currentDevicePrice ,-15}");
+            
+            if(color != ConsoleColor.White) Console.ResetColor();
         }
     }
 }

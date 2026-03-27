@@ -6,7 +6,6 @@ namespace Week13_Asset_Tracking
 {
     class Function
     {
-
         public static void AddSampleAssets(List<Assets> assets)
         {
             //Offices

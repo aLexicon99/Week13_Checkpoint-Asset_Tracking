@@ -15,9 +15,27 @@ namespace Week13_Asset_Tracking
             Currency = currency;
         }
 
-        public string GetPrice()
+        public static decimal GetPrice(string currancy, decimal price)
         {
-            return Currency;
+            decimal currancyPrice = 0;
+
+            // Rates Date : 27/3 - 2026
+            switch (currancy)
+            {
+                case "USD":
+                    currancyPrice = price * 0.9m;
+                    break;
+                case "EUR":
+                    currancyPrice = price * 0.86m;
+                    break;
+                case "SEK":
+                    currancyPrice = price * 9.44m;
+                    break;
+
+                default: break;
+            }
+            
+            return currancyPrice;
         }
     }
 }
