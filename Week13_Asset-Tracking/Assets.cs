@@ -8,13 +8,14 @@ namespace Week13_Asset_Tracking
     {
         public string Brand { get; set; }
         public string Model { get; set; }
+        public decimal Price { get; set; }
         public DateTime? PurchaseDate { get; set; }
 
         //public Office AssignedOffice { get; set; }
         public static void ShowDevices(List<Assets> assets)
         {
-            Console.WriteLine($"Type\t\tBrand\t\tModel\t\tPurchase Date");
-            Console.WriteLine("----\t\t-----\t\t-----\t\t-------------");
+            Console.WriteLine($"Type\t\tBrand\t\tModel\t\tPurchase Date\t\tPrice in USD");
+            Console.WriteLine("----\t\t-----\t\t-----\t\t-------------\t\t------------");
 
 
             foreach (Assets device in assets)
@@ -36,17 +37,17 @@ namespace Week13_Asset_Tracking
                         if(dateTime >= warrantyEnd)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}");
+                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
                             Console.ResetColor();
                         }else if (DateTime.Now >= threeMonthsFromNow) {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}");
+                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
                             Console.ResetColor();
                         }
                     }
                     else
                     {
-                        Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}");
+                        Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
 
                     }
                 }

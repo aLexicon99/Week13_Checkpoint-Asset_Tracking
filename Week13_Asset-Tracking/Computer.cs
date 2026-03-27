@@ -6,10 +6,11 @@ namespace Week13_Asset_Tracking
 {
     public class Computer : Assets
     {
-        public Computer(string brand, string model, DateTime purchaseDate)
+        public Computer(string brand, string model, decimal price, DateTime purchaseDate)
         {
             Brand = brand;
             Model = model;
+            Price = price;
             PurchaseDate = purchaseDate;
         }
     }

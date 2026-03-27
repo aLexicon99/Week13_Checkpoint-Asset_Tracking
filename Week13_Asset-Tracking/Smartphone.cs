@@ -6,10 +6,11 @@ namespace Week13_Asset_Tracking
 {
     public class Smartphone : Assets
     {
-        public Smartphone(string brand, string model, DateTime purchaseDate)
+        public Smartphone(string brand, string model, decimal price, DateTime purchaseDate)
         {
             Brand = brand;
             Model = model;
+            Price = price;
             PurchaseDate = purchaseDate;
         }
     }
