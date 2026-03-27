@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Week13_Asset_Tracking
 {
-    internal class Office
+    public class Office
     {
         public string Country { get; set; }
         public string Currency { get; set; }
@@ -13,6 +13,11 @@ namespace Week13_Asset_Tracking
         {
             Country = country;
             Currency = currency;
+        }
+
+        public string GetPrice()
+        {
+            return Currency;
         }
     }
 }
