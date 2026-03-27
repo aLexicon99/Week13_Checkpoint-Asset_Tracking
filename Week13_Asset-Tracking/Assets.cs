@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Week13_Asset_Tracking
@@ -11,14 +12,15 @@ namespace Week13_Asset_Tracking
         public decimal Price { get; set; }
         public DateTime? PurchaseDate { get; set; }
 
-        //public Office AssignedOffice { get; set; }
         public static void ShowDevices(List<Assets> assets)
         {
             Console.WriteLine($"Type\t\tBrand\t\tModel\t\tPurchase Date\t\tPrice in USD");
             Console.WriteLine("----\t\t-----\t\t-----\t\t-------------\t\t------------");
 
+            var sortedAssets = assets.OrderBy(a => a is Computer ? 0 : 1)
+                .ThenBy(a => a.PurchaseDate).ToList();
 
-            foreach (Assets device in assets)
+            foreach (Assets device in sortedAssets)
             {
                 DateTime dateTime = DateTime.Now;
                 DateTime device_PurchaseDate = (DateTime)device.PurchaseDate;
@@ -35,23 +37,24 @@ namespace Week13_Asset_Tracking
                     if (dateTime >= warrany_warningStart)
                     {
                         if(dateTime >= warrantyEnd)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
-                            Console.ResetColor();
-                        }else if (DateTime.Now >= threeMonthsFromNow) {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
-                            Console.ResetColor();
-                        }
+                            PresentDeviceInfo(device, deviceDate, ConsoleColor.Red);
+                        else if (DateTime.Now >= threeMonthsFromNow)
+                            PresentDeviceInfo(device, deviceDate, ConsoleColor.Yellow);
                     }
                     else
                     {
-                        Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{deviceDate,-15}\t\t{device.Price,-15}");
-
+                        PresentDeviceInfo(device, deviceDate);
                     }
                 }
             }
+        }
+
+        public static void PresentDeviceInfo(Assets device, string date, ConsoleColor color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine($"{device.GetType().Name}\t{device.Brand,-15}\t{device.Model,-15}\t{date,-15}\t\t{device.Price,-15}");
+            if(color != ConsoleColor.White) Console.ResetColor();
+            
         }
     }
 }

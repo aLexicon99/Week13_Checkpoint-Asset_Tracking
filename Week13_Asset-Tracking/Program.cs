@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Week13_Asset_Tracking
+﻿namespace Week13_Asset_Tracking
 {
     internal class Program
     {
@@ -9,11 +7,7 @@ namespace Week13_Asset_Tracking
         static void Main(string[] args)
         {
             Function.AddSampleAssets(assets);
-
-            while (true)
-            {
-                AddNewDevice();
-            }
+            while (true) AddNewDevice();
         }
         public static void AddNewDevice()
         {
