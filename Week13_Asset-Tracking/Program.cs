@@ -1,45 +1,97 @@
-﻿namespace Week13_Asset_Tracking
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Week13_Asset_Tracking
 {
     internal class Program
     {
-
+        public static List<Assets> assets = new List<Assets>();
+        
         static void Main(string[] args)
         {
-            // Offices
+            Function.AddSampleAssets(assets);
 
-            Office spain_office =   new Office("Spain", "EUR");
-            Office sweden_office =  new Office("Sweden", "SEK");
-            Office usa_office =     new Office("USA", "USD");
+            while (true)
+            {
+                AddNewDevice();
+            }
 
-            // PurchaseDate
-            //DateTime purchaseDate = new DateTime(2018, 12, 21);
-            //Console.WriteLine(purchaseDate.ToShortDateString());
+        }
+        public static void AddNewDevice()
+        {
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine("Add New Asset by Pressing 1 or 2 to");
+            Console.WriteLine("1) Add Smartphone\n2) Add Computer");
 
-            //DateTime warrantyEnd = purchaseDate.AddYears(3);
-            //Console.WriteLine("Warrany ends @ " + warrantyEnd);
+            string type = Console.ReadLine().Trim();
 
-            ////DateTime purchaseDate2 = DateTime.Parse("12/29/2018");
-            //Console.ReadLine();
+            switch (type)
+            {
+                case "1":
+                    Console.Clear();
+                    Console.WriteLine("Add NEW Smartphone");
+                    break;
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Add NEW Computer");
+                    break;
+                default:
+                    Console.Clear();
+                    Assets.ShowDevices(assets);
+                    break;
+            }
+
+            //Console.Write("Enter Brand: ");
+            //string brand = Console.ReadLine().Trim();
+            string brand = "HP";
+
+            //Console.Write("Enter Model: ");
+            //string model = Console.ReadLine().Trim();
+            string model = "ProBook G1";
+
+            Console.Write("Enter Purchase Date (ex yyyy-MM-dd): ");
+            string date = Console.ReadLine().Trim();
 
 
-            // Devices
+            DateTime purchaseDate = new();
 
-            List<Device> devices = new List<Device>();
+            // DATE TEST PARSE
+            if (date != "")
+            {
+                bool isValidDate = DateTime.TryParse(date, out DateTime result);
+                //Console.WriteLine($"isValidDate : {isValidDate} - Date : {result.ToString("yyyy-MM-dd")}");
 
-            Smartphone iphone8 =    new Smartphone("iPhone", "8",       new DateTime(2018, 12, 29));
-            Computer hp =           new Computer("HP", "Elitebook",     new DateTime(2019, 6, 1));
-            Smartphone iphone11 =   new Smartphone("iPhone", "11",      new DateTime(2020, 9, 25));
-            Smartphone phoneX =     new Smartphone("iPhone", "X",       new DateTime(2018, 7, 15));
-            Smartphone motorola =   new Smartphone("Motorola", "Razr",  new DateTime(2020, 3, 16));
-            Computer hp2 =          new Computer("HP", "Elitebook",     new DateTime(2020, 10, 2));
-            Computer asus =         new Computer("Asus", "W234",        new DateTime(2017, 4, 21));
-            Computer lenovo =       new Computer("Lenovo", "Yoga 730",  new DateTime(2018, 5, 28));
-            Computer lenovo2 =      new Computer("Lenovo", "Yoga 530",  new DateTime(2019, 5, 21));
-            Computer macbook =      new Computer("Apple", "MacBook",    new DateTime(2024, 12, 21));
+                if (isValidDate)
+                {
+                    purchaseDate = result;
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong format of Purchase Date : {date}");
+                    return;
+                }
+            }
 
 
-            devices.AddRange(iphone8, hp, iphone11, phoneX, motorola, hp2, asus, lenovo, lenovo2, macbook);
-            Device.ShowDevices(devices);
+            //////////////////////////////////////////////
+            if (int.Parse(type) == 1) // NEW Smartphone
+            {
+                assets.Add(new Smartphone(brand, model, purchaseDate));
+            }
+            if (int.Parse(type) == 2) // NEW Computer
+            {
+                assets.Add(new Computer(brand, model, purchaseDate));
+            }
+            //////////////////////////////////////////////
+
+
+            string deviceInfo = $"{brand} {model}, {DateTime.Now}";
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Added New Asset : {deviceInfo}");
+            Console.ResetColor();
+
+            Assets.ShowDevices(assets);
         }
     }
 }
